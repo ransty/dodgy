@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Cash to Books Calculator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #f9f9f9;
+    }
+
+    h2 {
+      text-align: center;
+      font-size: 1.8em;
+      margin-bottom: 30px;
+    }
+
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .calculator {
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      padding: 20px;
+      width: 100%;
+      max-width: 400px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    }
+
+    .calculator h3 {
+      margin-top: 0;
+      font-size: 1.3em;
+    }
+
+    label {
+      margin-top: 10px;
+      font-weight: bold;
+      display: block;
+    }
+
+    input[type="number"] {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      font-size: 1em;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 15px;
+      font-size: 1em;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    .result {
+      margin-top: 20px;
+      font-weight: bold;
+      font-size: 1.2em;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Dodgy Calculator</h2>
+
+  <div class="container">
+    <div class="calculator">
+      <h3>Cash to Books</h3>
+      <label for="cash1">Cash Price ($):</label>
+      <input type="number" id="cash1" placeholder="Enter cash price">
+
+      <label for="expenses1">Expenses ($):</label>
+      <input type="number" id="expenses1" placeholder="Enter expenses">
+
+      <button onclick="calculateBooksPrice('1')">Calculate Books Price</button>
+
+      <div class="result" id="result1"></div>
+    </div>
+
+    <div class="calculator">
+      <h3>Books to Cash</h3>
+      <label for="books2">Books Price ($):</label>
+      <input type="number" id="books2" placeholder="Enter books price">
+
+      <label for="expenses2">Expenses ($):</label>
+      <input type="number" id="expenses2" placeholder="Enter expenses">
+
+      <button onclick="calculateCashPrice('2')">Calculate Cash Price</button>
+
+      <div class="result" id="result2"></div>
+    </div>
+  </div>
+
+  <script>
+    function calculateBooksPrice(id) {
+      const cash = parseFloat(document.getElementById('cash' + id).value) || 0;
+      const expenses = parseFloat(document.getElementById('expenses' + id).value) || 0;
+      const books = cash + ((cash - expenses) * (10 / 7) - (cash - expenses));
+      document.getElementById('result' + id).textContent = `Books Price: $${books.toFixed(2)}`;
+    }
+
+    function calculateCashPrice(id) {
+      const books = parseFloat(document.getElementById('books' + id).value) || 0;
+      const expenses = parseFloat(document.getElementById('expenses' + id).value) || 0;
+      const cash = books - ((books - expenses) * 3 / 10);
+      document.getElementById('result' + id).textContent = `Cash Price: $${cash.toFixed(2)}`;
+    }
+  </script>
+
+</body>
+</html>
